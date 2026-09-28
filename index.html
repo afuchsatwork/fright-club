@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fright Club · Horror Movie Bracket 2026</title>
+<meta name="description" content="64 horror movies enter. One survives. Vote every weekday in October and help crown the 2026 Fright Club champion.">
+<meta property="og:title" content="Fright Club · Horror Movie Bracket 2026">
+<meta property="og:description" content="64 enter. One survives. Vote every weekday in October.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fright-club.com/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔪</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Special+Elite&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07060c; --surface:#12101c; --surface2:#181428; --ink:#ece8f7; --muted:#9c97b3; --line:#2e2745;
+  --blood:#d4102a; --blood2:#ff6a00; --candle:#ff6a00; --violet:#9b30ff; --violet2:#c792ff; --bar:rgba(255,106,0,.22); --fog:rgba(155,48,255,.09);
+  --btn:#ff6a00; --btnink:#07060c;
+  color-scheme:dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+/* the carnival stays dark in every theme */
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#07060c; --surface:#12101c; --surface2:#181428; --ink:#ece8f7; --muted:#9c97b3; --line:#2e2745;
+  --blood:#d4102a; --blood2:#ff6a00; --candle:#ff6a00; --violet:#9b30ff; --violet2:#c792ff; --bar:rgba(255,106,0,.22); --fog:rgba(155,48,255,.09);
+  --btn:#ff6a00; --btnink:#07060c;
+  color-scheme:dark; } }
+:root[data-theme="dark"]{ --bg:#07060c; --surface:#12101c; --surface2:#181428; --ink:#ece8f7; --muted:#9c97b3; --line:#2e2745;
+  --blood:#d4102a; --blood2:#ff6a00; --candle:#ff6a00; --violet:#9b30ff; --violet2:#c792ff; --bar:rgba(255,106,0,.22); --fog:rgba(155,48,255,.09);
+  --btn:#ff6a00; --btnink:#07060c;
+  color-scheme:dark; }
+:root[data-theme="light"]{ --bg:#07060c; --surface:#12101c; --surface2:#181428; --ink:#ece8f7; --muted:#9c97b3; --line:#2e2745;
+  --blood:#d4102a; --blood2:#ff6a00; --candle:#ff6a00; --violet:#9b30ff; --violet2:#c792ff; --bar:rgba(255,106,0,.22); --fog:rgba(155,48,255,.09);
+  --btn:#ff6a00; --btnink:#07060c;
+  color-scheme:dark; }
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Condensed","Arial Narrow",Arial,sans-serif;font-size:16px;line-height:1.45;overflow-x:hidden}
+button,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--candle);outline-offset:2px}
+
+/* atmosphere */
+.fog{position:fixed;inset:-20%;pointer-events:none;z-index:0;
+  background:radial-gradient(40% 30% at 20% 70%,var(--fog),transparent 70%),radial-gradient(35% 25% at 80% 30%,var(--fog),transparent 70%),radial-gradient(50% 35% at 50% 100%,var(--fog),transparent 70%);
+  animation:drift 70s ease-in-out infinite alternate}
+.fog.two{animation-duration:95s;animation-direction:alternate-reverse;opacity:.8}
+@keyframes drift{from{transform:translate3d(-4%,0,0)}to{transform:translate3d(4%,-3%,0)}}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.09;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.45) 100%)}
+.page{position:relative;z-index:1}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* hero */
+.drips{display:block;width:100%;height:70px;color:var(--blood)}
+header.hero{padding:6px 0 26px;position:relative}
+.topbar{display:flex;justify-content:flex-end;min-height:22px;color:var(--muted);font-size:14px}
+.topbar b{color:var(--ink);font-weight:600}
+.hero h1{font-family:Nosifer,Impact,fantasy;font-weight:400;font-size:clamp(34px,8.4vw,96px);line-height:1.15;margin:18px 0 0;color:var(--blood2);
+  text-shadow:4px 4px 0 var(--violet),0 0 28px rgba(255,106,0,.35);animation:flicker 2.4s linear 1 both}
+@keyframes flicker{0%{opacity:0}8%{opacity:.9}10%{opacity:.2}14%{opacity:1}30%{opacity:.35}33%{opacity:1}60%{opacity:1}62%{opacity:.5}64%{opacity:1}100%{opacity:1}}
+.hero .tag{font-family:"Special Elite","Courier New",monospace;font-size:clamp(18px,2.6vw,24px);margin:14px 0 0;color:var(--violet2)}
+.hero p.lede{margin:14px 0 0;max-width:60ch;color:var(--muted);font-size:17px}
+.status{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:baseline}
+.status strong{font-size:20px}
+.status .sub{color:var(--muted)}
+.status .clock{color:var(--candle);font-weight:600}
+.notice{margin-top:14px;padding:10px 14px;border-left:3px solid var(--candle);background:var(--surface);max-width:72ch}
+.cobweb{position:absolute;right:0;top:0;width:150px;height:150px;color:var(--violet2);opacity:.35;pointer-events:none}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 8px 16px -12px rgba(0,0,0,.6)}
+nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto}
+nav.tabs button{background:none;border:0;padding:14px 14px 11px;font-weight:600;font-size:16px;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--candle)}
+
+main{padding:30px 0 80px}
+.group{margin-bottom:44px}
+.group-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:16px;border-bottom:2px solid var(--cat,var(--violet));padding-bottom:8px}
+.group-head h2{font-family:"Special Elite","Courier New",monospace;font-weight:400;font-size:26px;margin:0;color:var(--cat,var(--ink))}
+.group-head span{color:var(--muted);white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.empty{padding:28px;border:1px dashed var(--line);border-radius:4px;background:var(--surface);max-width:62ch}
+.empty h2{font-family:"Special Elite",monospace;font-weight:400;margin:0 0 6px;font-size:24px}
+.empty p{margin:0;color:var(--muted)}
+
+/* matchup */
+.match{background:linear-gradient(180deg,var(--surface2),var(--surface));border:1px solid color-mix(in srgb,var(--cat,var(--violet)) 50%,transparent);border-top:4px solid var(--cat,var(--violet));border-radius:3px;position:relative;box-shadow:0 10px 24px -14px rgba(0,0,0,.7)}
+.blurb{font-family:"Special Elite","Courier New",monospace;font-size:15px;line-height:1.5;margin:0;padding:14px 16px 12px;color:var(--ink);border-bottom:1px solid var(--line)}
+.row{position:relative;display:flex;align-items:stretch;isolation:isolate}
+.row::before{content:"";position:absolute;inset:0 auto 0 0;width:var(--w,0%);background:var(--bar);z-index:-1;transition:width .6s ease}
+.pick{flex:1;display:grid;grid-template-columns:28px 30px 1fr auto;align-items:center;gap:8px;min-height:54px;padding:8px 6px 8px 14px;background:none;border:0;text-align:left;cursor:pointer}
+button.pick:hover{background:color-mix(in srgb,var(--candle) 8%,transparent)}
+div.pick{cursor:default}
+.imdb{display:flex;align-items:center;padding:0 14px;font-size:12px;font-weight:700;color:var(--muted);text-decoration:none;border-left:1px dashed var(--line)}
+.imdb:hover{color:var(--candle)}
+.seed{font-weight:700;font-size:13px;color:var(--muted);text-align:center;border:1px solid var(--line);border-radius:2px}
+.emo{font-size:23px;line-height:1;text-align:center}
+.name{font-weight:600;line-height:1.2}
+.name small{font-weight:400;color:var(--muted);margin-left:5px}
+.pct{font-weight:700;font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px}
+.row.mine{box-shadow:inset 4px 0 0 var(--candle)}
+.row.mine .pct{color:var(--candle)}
+.row.mine.flash::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,106,0,.4),transparent 60%);animation:glow .7s ease-out forwards;pointer-events:none}
+@keyframes glow{from{opacity:1}to{opacity:0}}
+.row.won .name{color:var(--blood2)}
+.row.lost{opacity:.45}
+.row.lost .name{text-decoration:line-through;text-decoration-color:var(--blood)}
+.row:not(.mine) .pct{color:var(--violet2)}
+.row.tbd .name{color:var(--muted);font-weight:400;font-style:italic}
+.vs{position:relative;height:0;text-align:center;z-index:2}
+.vs span{position:relative;top:-11px;font-family:Nosifer,Impact,fantasy;font-size:12px;color:var(--violet2);background:var(--surface);padding:0 8px;line-height:22px}
+.catchip{color:var(--cat,var(--muted));font-weight:600;text-align:right}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--cat);margin-right:8px;vertical-align:1px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.legend span{font-size:14px;font-weight:600;padding:4px 10px;border-radius:999px;color:var(--cat);border:1px solid color-mix(in srgb,var(--cat) 60%,transparent);background:color-mix(in srgb,var(--cat) 10%,transparent)}
+.quip{font-family:"Special Elite","Courier New",monospace;font-size:15px;line-height:1.45;margin:0;padding:11px 16px;color:var(--violet2);border-top:1px dashed var(--line);background:color-mix(in srgb,var(--violet) 8%,transparent)}
+.mfoot{font-size:13px;color:var(--muted);padding:7px 14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
+
+/* bracket */
+.bracket{overflow-x:auto;padding-bottom:8px}
+.bgrid{display:grid;grid-template-columns:repeat(4,minmax(215px,1fr));gap:14px;min-width:900px}
+.bgrid.final{grid-template-columns:repeat(3,minmax(215px,1fr));min-width:690px}
+.bcol{display:flex;flex-direction:column;justify-content:space-around;gap:10px}
+.bcol h3{font-size:14px;font-weight:600;color:var(--muted);margin:0 0 4px}
+.bracket .pick{min-height:38px;padding:4px 6px 4px 10px;grid-template-columns:24px 22px 1fr auto;font-size:14px}
+.bracket .emo{font-size:16px}
+.bracket .imdb{display:none}
+.bracket .row + .row{border-top:1px dashed var(--line)}
+
+/* schedule */
+.sched{display:grid;gap:8px}
+.sday{display:grid;grid-template-columns:120px 1fr auto;gap:14px;align-items:start;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:3px}
+.sday.today{border-color:var(--candle);box-shadow:0 0 0 1px var(--candle),4px 4px 0 var(--violet)}
+.sday.done{opacity:.6}
+.sday .d{font-weight:700}
+.sday .d small{display:block;font-weight:400;color:var(--muted)}
+.sday ul{margin:0;padding:0;list-style:none}
+.sday li{padding:1px 0}
+.chip{font-size:13px;font-weight:700;padding:2px 8px;border-radius:2px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.sday.today .chip{border-color:var(--candle);color:var(--candle)}
+
+/* organizer */
+.org .match{margin-bottom:0}
+.adminbar{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
+.btn{background:var(--btn);color:var(--btnink);border:0;border-radius:3px;padding:8px 12px;font-weight:700;font-size:14px;cursor:pointer}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}
+.btn.danger{background:var(--blood);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.blurbedit{padding:10px 14px;border-top:1px solid var(--line)}
+.blurbedit textarea{width:100%;min-height:62px;background:var(--bg);border:1px solid var(--line);border-radius:3px;padding:8px;font-family:"Special Elite",monospace;font-size:14px;resize:vertical}
+.blurbedit .btns{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+details.day{margin-bottom:10px;border:1px solid var(--line);border-radius:3px;background:color-mix(in srgb,var(--surface) 60%,transparent)}
+details.day summary{padding:12px 14px;cursor:pointer;font-weight:600}
+details.day summary span{color:var(--muted);font-weight:400;margin-left:8px}
+details.day .grid{padding:0 14px 14px}
+.danger-zone{margin-top:36px;padding:16px;border:1px dashed var(--blood);border-radius:3px}
+.danger-zone p{margin:0 0 10px;color:var(--muted)}
+
+.linkbtn{background:none;border:0;padding:0;margin-left:8px;color:var(--candle);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.auth{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(4,3,8,.78);backdrop-filter:blur(3px)}
+.auth[hidden]{display:none}
+.auth-card{position:relative;width:100%;max-width:400px;background:var(--surface);border:1px solid var(--violet);border-top:4px solid var(--candle);border-radius:4px;padding:26px 24px 18px;box-shadow:6px 6px 0 var(--violet)}
+.auth-card h2{font-family:Nosifer,Impact,fantasy;font-weight:400;font-size:24px;color:var(--candle);margin:0 0 6px;line-height:1.3}
+.auth-sub{margin:0 0 18px;color:var(--muted)}
+.auth-x{position:absolute;top:8px;right:10px;background:none;border:0;font-size:26px;line-height:1;color:var(--muted);cursor:pointer}
+.auth .google{width:100%;padding:11px;font-size:15px}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin:16px 0}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+#auth-form{display:grid;gap:12px}
+#auth-form label{display:grid;gap:4px;font-size:14px;font-weight:600;color:var(--muted)}
+#auth-form input{background:var(--bg);border:1px solid var(--line);border-radius:3px;padding:10px;color:var(--ink);font:inherit}
+#auth-form input:focus{border-color:var(--violet);outline:none}
+#auth-form .btn{padding:11px;font-size:15px}
+.auth-msg{min-height:1.2em;margin:12px 0 0;color:var(--violet2);font-size:14px}
+.auth-switch{margin:8px 0 0;font-size:14px}
+.auth-switch .linkbtn{margin:0}
+.site-foot{border-top:1px solid var(--line);padding:36px 0 56px;color:var(--muted)}
+.site-foot h2{font-family:"Special Elite","Courier New",monospace;font-weight:400;font-size:22px;color:var(--ink);margin:0 0 10px}
+.site-foot p{max-width:72ch;margin:0 0 12px}
+.site-foot a{color:var(--candle)}
+.site-foot .fine{font-size:14px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--btn);color:var(--btnink);padding:10px 16px;border-radius:3px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw;z-index:10}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion: reduce){.fog{animation:none}.hero h1{animation:none}.row::before{transition:none}.row.mine.flash::after{animation:none;display:none}}
+@media (max-width:560px){.grid{grid-template-columns:1fr}.group-head h2{font-size:22px}.sday{grid-template-columns:1fr}.cobweb{width:90px;height:90px}}
+</style>
+</head>
+<body>
+<div class="fog" aria-hidden="true"></div><div class="fog two" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
+<div class="page">
+<svg class="drips" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 0H1200V14c-20 0-24 6-30 6s-8 30-14 30-6-28-14-28-30 8-58 8c-10 0-12 44-20 44s-8-42-18-42c-40 0-70-10-110-10-8 0-9 22-15 22s-7-20-15-20c-60 0-90 6-140 6-8 0-10 36-17 36s-8-34-16-34c-50 0-80-8-130-8-8 0-9 16-14 16s-6-14-13-14c-60 0-100 10-160 10-9 0-10 40-18 40s-8-38-17-38c-50 0-80-8-120-8-7 0-8 18-13 18s-6-16-13-16C60 12 30 16 0 16Z"/></svg>
+<header class="hero">
+  <svg class="cobweb" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M150 0L20 130M150 0L60 150M150 0L0 90M150 0L100 150M150 0L0 40"/><path d="M125 0q5 20 25 25M100 0q8 42 50 50M72 0q12 66 78 78M44 0q18 88 106 106M16 0q24 110 134 134"/></svg>
+  <div class="wrap">
+    <div class="topbar" id="who"></div>
+    <h1>Fright Club</h1>
+    <p class="tag">Horror Movie Bracket. The 2026 edition</p>
+    <p class="lede">64 enter. One survives. Two movies in each category will go head-to-head until we crown our winner on October 31.</p>
+    <div class="legend" aria-label="Categories"><span style="--cat:#63e052">🧟 Monster / Zombie</span><span style="--cat:#b85cff">🧠 Psychological / Thriller</span><span style="--cat:#ff3b4e">🔪 Slasher / Comedy</span><span style="--cat:#62d3ff">👻 Paranormal / Third Wave</span></div>
+    <div class="status" id="status"></div>
+    <div id="notice"></div>
+  </div>
+</header>
+<nav class="tabs" aria-label="Views"><div class="wrap" id="tabs"></div></nav>
+<main><div class="wrap" id="app"></div></main>
+<footer class="site-foot">
+  <div class="wrap">
+    <h2>About Fright Club</h2>
+    <p>Fright Club is a free, just-for-fun horror movie bracket for our October work event. Sixty-four horror movies across four categories face off in daily head-to-head matchups every weekday from October 5 to October 30, and the organizer crowns a winner each round until one movie is named the 2026 champion.</p>
+    <p>Anyone can browse the bracket, schedule, and results without an account. To vote, you sign in with Google or with an email and password. We use your name and email only to sign you in and to make sure each person gets one ballot. We never sell or share your information. See our <a href="privacy.html">privacy policy</a> for details.</p>
+    <p class="fine">Questions? Email <a href="mailto:acfuchsgrc@gmail.com">acfuchsgrc@gmail.com</a>. Fright Club is not affiliated with any film studio. Movie titles belong to their respective owners.</p>
+  </div>
+</footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<div class="auth" id="auth" hidden>
+  <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <button class="auth-x" data-closeauth aria-label="Close">×</button>
+    <h2 id="auth-title">Join Fright Club</h2>
+    <p class="auth-sub">Sign in to vote. One ballot per person.</p>
+    <button class="btn google" data-google>Continue with Google</button>
+    <div class="or"><span>or use email</span></div>
+    <form id="auth-form">
+      <label id="auth-name-wrap" hidden>Your name<input id="auth-name" autocomplete="name" placeholder="How you'll show up on the site"></label>
+      <label>Email<input id="auth-email" type="email" required autocomplete="email"></label>
+      <label>Password<input id="auth-pw" type="password" required minlength="6" autocomplete="current-password"></label>
+      <button class="btn" type="submit" id="auth-submit">Sign in</button>
+    </form>
+    <p class="auth-msg" id="auth-msg" role="status"></p>
+    <p class="auth-switch"><button class="linkbtn" type="button" data-authmode>New here? Create an account</button></p>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
+<script>
+// ====== SUPABASE CONFIG: paste your project's values here ======
+// Supabase dashboard > Project Settings > API (or "Connect")
+const SUPABASE_URL = "https://iivzcrdbbaxzcxxarzzx.supabase.co";       // e.g. https://abcdxyz.supabase.co
+const SUPABASE_ANON_KEY = "sb_publishable_Lbj2BzciosXWa4_IDqMmNA_lUAcLvdZ"; // the "anon public" or "publishable" key (safe to share)
+// ================================================================
+const CONFIGURED = !SUPABASE_URL.startsWith("PASTE") && !SUPABASE_ANON_KEY.startsWith("PASTE") && !!window.supabase;
+const TZ = "America/Los_Angeles";
+const REGIONS = ["Monster / Zombie","Psychological / Thriller","Slasher / Comedy","Paranormal / Third Wave"];
+// Category colors and icons, same order as REGIONS
+const CAT_ICON = ["🧟","🧠","🔪","👻"];
+const CAT_COLOR = ["#63e052","#b85cff","#ff3b4e","#62d3ff"];
+const catIdx = (r,m) => r <= 4 ? Math.floor(m / ((64 >> r) / 4)) : -1;
+const catColor = (r,m) => { const c = catIdx(r,m); return c < 0 ? "var(--violet)" : CAT_COLOR[c]; };
+const catChip = (r,m) => { const c = catIdx(r,m); return c < 0 ? ROUNDS[r-1] : `${CAT_ICON[c]} ${REGIONS[c]} · ${ROUNDS[r-1]}`; };
+const ROUNDS = ["Round 1","Round 2","Sweet 16","Elite 8","Final 4","Championship"];
+const DAYS = ["2026-10-05","2026-10-06","2026-10-07","2026-10-08","2026-10-09","2026-10-12","2026-10-13","2026-10-14",
+  "2026-10-15","2026-10-16","2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23","2026-10-26",
+  "2026-10-27","2026-10-28","2026-10-29","2026-10-30"];
+// [title, year, emoji, seed] in bracket order; each pair is a Round 1 matchup
+const M = [
+["Sinners",2025,"👬",1],["IT",1990,"🎈",16],["The Witch",2015,"🐐",8],["Frankenstein",2025,"⚡",9],
+["The Thing",1982,"🐕",5],["Backrooms",2026,"🟨",12],["Train to Busan",2016,"🚆",4],["Nosferatu",2024,"🧛",13],
+["A Quiet Place",2018,"🤫",6],["The Descent",2005,"🔦",11],["Weapons",2025,"🌳",3],["Cloverfield",2008,"🗽",14],
+["28 Years Later: The Bone Temple",2026,"💀",7],["Annihilation",2018,"🌺",10],["Alien",1979,"🤗",2],["Dawn of the Dead",2004,"🛍️",15],
+["Silence of the Lambs",1991,"🧴",1],["Event Horizon",1997,"⚫",16],["The Sixth Sense",1999,"🚪",8],["Heretic",2024,"🥧",9],
+["Oddity",2024,"👁️",5],["Longlegs",2024,"🕸️",12],["The Shining",1980,"🪓",4],["Don't Breathe",2016,"🫁",13],
+["The Babadook",2014,"🎩",6],["The Exorcist",1973,"🤮",11],["Obsession",2026,"💔",3],["American Psycho",2000,"💼",14],
+["The Substance",2024,"🧪",7],["Midsommar",2019,"🌷",10],["Get Out",2017,"🫖",2],["The Hills Have Eyes",2006,"🚐",15],
+["Halloween",1978,"🔪",1],["Final Destination",2000,"🪵",16],["Final Destination Bloodlines",2025,"🩸",8],["Zombieland",2009,"🎢",9],
+["The Texas Chain Saw Massacre",1974,"🪝",5],["Creep",2014,"🐺",12],["X",2022,"❌",4],["Ready or Not 2: Here I Come",2026,"🃏",13],
+["Companion",2025,"🤖",6],["Tucker & Dale vs Evil",2010,"🍺",11],["The Cabin in the Woods",2011,"🏚️",3],["Saw",2004,"🪚",14],
+["Barbarian",2022,"🍼",7],["Scream",1996,"😱",10],["Shaun of the Dead",2004,"🏏",2],["Jennifer's Body",2009,"😈",15],
+["Hereditary",2018,"🥜",1],["The Grudge",2004,"🚿",16],["Hokum",2026,"🏨",8],["The Autopsy of Jane Doe",2016,"🔔",9],
+["[REC]",2007,"🔴",5],["The Ring",2002,"📼",12],["Talk to Me",2023,"✋",4],["Black Phone 2",2025,"☎️",13],
+["Bring Her Back",2025,"💧",6],["The Blair Witch Project",1999,"⛺",11],["It Follows",2014,"🚶",3],["Sinister",2012,"🔍",14],
+["Drag Me to Hell",2009,"🔥",7],["The Conjuring",2013,"🪆",10],["A Nightmare on Elm Street",1984,"🧤",2],["Insidious",2010,"👹",15]
+];
+const R1_BLURBS = [
+"Juke-joint vampires vs. a sewer clown. Both lure you in with a good time, and neither lets you leave.",
+"Black Phillip wants to know if you'd like to live deliciously. Frankenstein's monster wants to know why his dad hates him. Both valid questions.",
+"Paranoia in the Antarctic snow vs. paranoia on damp yellow carpet. Trust no one, and whatever you do, don't no-clip.",
+"A train packed with sprinting infected vs. a count who takes his sweet, sweet time. Fast food or slow burn?",
+"Don't make a sound vs. don't go into the cave. Neither group listened, and here we are.",
+"At 2:17 a.m., the kids ran into the night. Meanwhile, something enormous is running through Manhattan. Somebody call a school board meeting.",
+"Ralph Fiennes dancing to Iron Maiden in a temple of skulls vs. a bear that screams with your friend's voice. Pick your nightmare soundtrack.",
+"In space, no one can hear you scream. At the mall, everyone can, and they're shambling toward the food court.",
+"Dr. Lecter would love to have you for dinner. The Event Horizon would love to show you where it's been. RSVP to one.",
+"He sees dead people. Hugh Grant sees a teachable moment about Monopoly and blueberry pie.",
+"A wooden mannequin that stares vs. a Nicolas Cage who stares harder. Both are sitting at the foot of your bed tonight.",
+"An axe through the bathroom door vs. a blind man who can hear you breathing. Do not tiptoe. Do not exhale.",
+"Ba-ba-dook-dook vs. pea soup. The Round 1 matchup nobody wanted to draw.",
+"Be careful what you wish for vs. be careful whose business card you mock.",
+"Remember, you are one. Also remember, the flower crown is a trap. Body horror or Swedish summer?",
+"The Sunken Place vs. a New Mexico shortcut. Both nightmares started with a road trip.",
+"Michael never runs and still catches you. Death never runs either, it just rearranges the furniture.",
+"Death's family reunion vs. Rule #32: enjoy the little things. Like surviving Round 1.",
+"Leatherface's family dinner vs. Peachfuzz's hug. Decline both invitations.",
+"A farmhouse with a grudge vs. game night with the in-laws, part two. Grace is not in the mood.",
+"A girlfriend with a factory reset vs. two sweethearts who just wanted to fix up their vacation cabin.",
+"Pick your monster from the elevator vs. pick which foot you need more. So many choices.",
+"Never walk down the hallway vs. never say you'll be right back. Horror rules battle.",
+"Go to the Winchester, have a pint, wait for it all to blow over. Or be hungry for boys, literally.",
+"A tongue click in the dark vs. a croak from the attic. Hope you weren't planning on sleeping.",
+"A haunted honeymoon suite vs. the longest night shift at the morgue. Room service or rigor mortis?",
+"Keep filming vs. don't watch the tape. A found-footage fight to the death.",
+"Hold the hand and say the words, or pick up the black phone. Either way, don't hang on too long.",
+"The foster home from hell vs. three film students and a map they definitely shouldn't have thrown in a creek.",
+"Something slowly walking toward you vs. home movies in the attic. You'll never look at moving boxes the same way.",
+"Never deny an old woman a loan extension. Never play hide-and-clap in a creepy farmhouse.",
+"Freddy wants you asleep. The Further wants you astral. Grab a coffee and choose wisely."
+];
+const LATER = [
+  (a,b) => `${a} and ${b} both clawed their way this far. Only one walks out of the fog.`,
+  (a,b) => `The candles are burning low. ${a} or ${b}?`,
+  (a,b) => `Something wicked this way comes, and it's either ${a} or ${b}.`,
+  (a,b) => `${a} vs. ${b}. Lock the doors, kill the lights, and choose.`
+];
+
+let state = {results:{}, overrides:{}, blurbs:{}, quips:{}};
+let tallies = {}, voterCount = 0, myPicks = {}, lastSnap = null;
+let db = null, uid = null, isAdmin = false, canVote = false, live = false, sampleFn = null, myName = "", lastRows = null;
+let view = "tonight", saving = false, dirty = false, flashKey = null, armed = null;
+let writeChain = Promise.resolve();
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const count = r => 64 >> r;
+const key = (r,m) => r + "-" + m;
+// IMDb title IDs, same order as M
+const IMDB = ["tt31193180", "tt0099864", "tt4263482", "tt1312221", "tt0084787", "tt26657236", "tt5700672", "tt5040012", "tt6644200", "tt0435625", "tt26581740", "tt1060277", "tt32141377", "tt2798920", "tt0078748", "tt0363547", "tt0102926", "tt0119081", "tt0167404", "tt28015403", "tt26470109", "tt23468450", "tt0081505", "tt4160708", "tt2321549", "tt0070047", "tt37287335", "tt0144084", "tt17526714", "tt8772262", "tt5052448", "tt0454841", "tt0077651", "tt0195714", "tt9619824", "tt1156398", "tt0072271", "tt2428170", "tt13560574", "tt33978029", "tt26584495", "tt1465522", "tt1259521", "tt0387564", "tt15791034", "tt0117571", "tt0365748", "tt1131734", "tt7784604", "tt0391198", "tt35672862", "tt3289956", "tt1038988", "tt0298130", "tt10638522", "tt29644189", "tt32246771", "tt0185937", "tt3235888", "tt1922777", "tt1127180", "tt1457767", "tt0087800", "tt1591095"];
+const imdb = i => "https://www.imdb.com/title/" + IMDB[i] + "/";
+function winnerOf(r,m){ const v = state.results[key(r,m)]; return (v === undefined || v === null) ? null : v; }
+function entrant(r,m,s){ return r === 1 ? 2*m + s : winnerOf(r-1, 2*m + s); }
+function sched(r,m){
+  if(r === 1) return [m % 8, m % 8];
+  if(r === 2) return [8 + m % 4, 8 + m % 4];
+  if(r === 3) return [12 + m % 2, 12 + m % 2];
+  if(r === 4) return m < 2 ? [14,14] : [15,15];
+  if(r === 5) return [16 + m, 16 + m];
+  return [18,19];
+}
+function label(r,m){ return r <= 4 ? REGIONS[Math.floor(m / (count(r)/4))] : ROUNDS[r-1]; }
+function todayStr(){ return new Intl.DateTimeFormat("en-CA",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date()); }
+function minsLeft(){
+  const p = new Intl.DateTimeFormat("en-US",{timeZone:TZ,hour:"numeric",minute:"numeric",hourCycle:"h23"}).formatToParts(new Date());
+  const h = +p.find(x => x.type === "hour").value, mi = +p.find(x => x.type === "minute").value;
+  return (23 - h) * 60 + (60 - mi);
+}
+function fmtDay(s, long){ return new Date(s + "T12:00:00Z").toLocaleDateString("en-US", long ? {weekday:"long",month:"long",day:"numeric",timeZone:"UTC"} : {weekday:"short",month:"short",day:"numeric",timeZone:"UTC"}); }
+function all(){ const out = []; for(let r = 1; r <= 6; r++) for(let m = 0; m < count(r); m++) out.push([r,m]); return out; }
+function status(r,m){
+  const k = key(r,m);
+  if(winnerOf(r,m) !== null) return "decided";
+  if(entrant(r,m,0) === null || entrant(r,m,1) === null) return "waiting";
+  const ov = state.overrides[k];
+  if(ov === "open") return "open";
+  if(ov === "closed") return "closed";
+  const [s,e] = sched(r,m), t = todayStr();
+  if(t < DAYS[s]) return "upcoming";
+  if(t > DAYS[e]) return "closed";
+  return "open";
+}
+function blurb(r,m){
+  const k = key(r,m);
+  if(state.blurbs[k]) return state.blurbs[k];
+  if(r === 1) return R1_BLURBS[m];
+  const a = entrant(r,m,0), b = entrant(r,m,1);
+  if(a === null || b === null) return "The fog hasn't lifted on this one yet. Check back once the earlier matchups are decided.";
+  return LATER[(r + m) % LATER.length](M[a][0], M[b][0]);
+}
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 2800);
+}
+
+function rowHTML(r,m,s,o){
+  const idx = entrant(r,m,s);
+  if(idx === null) return `<div class="row tbd"><div class="pick"><span></span><span></span><span class="name">To be decided</span><span></span></div></div>`;
+  const [title, year, emo, seed] = M[idx];
+  const k = key(r,m), t = tallies[k] || [0,0], total = t[0] + t[1];
+  const mine = myPicks[k] === s, w = winnerOf(r,m);
+  const pct = o.reveal && total > 0 ? Math.round(t[s] / total * 100) : null;
+  const cls = ["row", mine ? "mine" : "", mine && flashKey === k ? "flash" : "", w !== null ? (w === idx ? "won" : "lost") : ""].join(" ");
+  const inner = `<span class="seed">${seed}</span><span class="emo" aria-hidden="true">${emo}</span><span class="name">${esc(title)}<small>${year}</small></span><span class="pct">${pct === null ? (mine ? "Your pick" : "") : pct + "%"}</span>`;
+  const pick = o.interactive
+    ? `<button class="pick" data-vote="${k}" data-s="${s}" aria-pressed="${mine}" aria-label="Vote for ${esc(title)}">${inner}</button>`
+    : `<div class="pick">${inner}</div>`;
+  return `<div class="${cls}" style="--w:${pct === null ? 0 : pct}%">${pick}<a class="imdb" href="${imdb(idx)}" target="_blank" rel="noopener" aria-label="${esc(title)} on IMDb">IMDb</a></div>`;
+}
+
+function matchHTML(r,m,mode){
+  const k = key(r,m), st = status(r,m);
+  const voted = myPicks[k] !== undefined;
+  const interactive = mode === "full" && live && st === "open";
+  const reveal = voted || st === "decided" || st === "closed" || isAdmin;
+  const t = tallies[k] || [0,0], total = t[0] + t[1];
+  const rows = rowHTML(r,m,0,{interactive,reveal}) + `<div class="vs" aria-hidden="true"><span>vs</span></div>` + rowHTML(r,m,1,{interactive,reveal});
+  if(mode === "compact") return `<div class="match" style="--cat:${catColor(r,m)}">${rows}</div>`;
+  const [s,e] = sched(r,m);
+  const when = s === e ? fmtDay(DAYS[s]) : fmtDay(DAYS[s]) + " – " + fmtDay(DAYS[e]);
+  const note = st === "decided" ? "Winner crowned" :
+    st === "closed" ? "Voting closed. Awaiting the organizer's verdict" :
+    st === "upcoming" ? "Opens " + when :
+    st === "waiting" ? "Waiting on earlier results" :
+    !live ? "Connecting to the crypt..." :
+    !uid ? "Sign in to vote" :
+    voted ? `${total} vote${total === 1 ? "" : "s"} so far. Tap the other movie to switch` : "Pick one to see how others voted";
+  const quip = st === "decided" && state.quips && state.quips[k] ? `<p class="quip"><span aria-hidden="true">🔪</span> ${esc(state.quips[k])}</p>` : "";
+  let html = `<article class="match" style="--cat:${catColor(r,m)}"><p class="blurb">${esc(blurb(r,m))}</p>${rows}${quip}<div class="mfoot"><span>${note}</span><span class="catchip">${catChip(r,m)}</span></div>`;
+  if(mode === "admin") html += adminControls(r,m,st);
+  return html + `</article>`;
+}
+
+function adminControls(r,m,st){
+  const k = key(r,m), a = entrant(r,m,0), b = entrant(r,m,1), t = tallies[k] || [0,0];
+  let btns = "";
+  if(a !== null && b !== null){
+    if(st !== "decided"){
+      btns += `<button class="btn" data-crown="${k}" data-idx="${a}">Advance ${esc(M[a][0])} (${t[0]})</button>`;
+      btns += `<button class="btn" data-crown="${k}" data-idx="${b}">Advance ${esc(M[b][0])} (${t[1]})</button>`;
+      btns += st === "open"
+        ? `<button class="btn ghost" data-ov="${k}" data-val="closed">Close voting</button>`
+        : `<button class="btn ghost" data-ov="${k}" data-val="open">${st === "upcoming" ? "Open voting early" : "Reopen voting"}</button>`;
+      if(state.overrides[k]) btns += `<button class="btn ghost" data-ov="${k}" data-val="">Back to schedule</button>`;
+    } else {
+      const next = r < 6 ? key(r+1, Math.floor(m/2)) : null;
+      const locked = next && state.results[next] !== undefined;
+      btns += locked ? `<span class="pct">The next matchup is already decided, so this result is locked.</span>`
+        : `<button class="btn ghost" data-undo="${k}">${armed === "undo:" + k ? "Click again to confirm" : "Undo winner"}</button>`;
+    }
+  }
+  const custom = state.blurbs[k] || "";
+  const edit = (a !== null && b !== null) ? `<div class="blurbedit"><textarea data-blurbfor="${k}" aria-label="Matchup text" placeholder="Write your own matchup text">${esc(custom || blurb(r,m))}</textarea>
+    <div class="btns"><button class="btn ghost" data-saveblurb="${k}">Save text</button>${custom ? `<button class="btn ghost" data-resetblurb="${k}">Use default text</button>` : ""}</div></div>` : "";
+  let quipEdit = "";
+  if(st === "decided"){
+    const w = winnerOf(r,m), q = (state.quips && state.quips[k]) || "";
+    quipEdit = `<div class="blurbedit"><textarea data-quipfor="${k}" aria-label="Winner one-liner" placeholder="Winner one-liner for ${esc(M[w][0])}">${esc(q)}</textarea>
+    <div class="btns"><button class="btn ghost" data-savequip="${k}">Save one-liner</button>${q ? `<button class="btn ghost" data-clearquip="${k}">Remove one-liner</button>` : ""}</div></div>`;
+  }
+  return `<div class="adminbar">${btns}</div>${quipEdit}${st === "decided" ? "" : edit}`;
+}
+
+function renderWho(){
+  document.getElementById("who").innerHTML = uid ? `<span>Voting as <b>${esc(myName || "you")}</b> <button class="linkbtn" data-signout>Sign out</button></span>` : (live ? `<button class="linkbtn" data-auth>Sign in to vote</button>` : "");
+}
+
+function renderStatus(){
+  const t = todayStr(), st = document.getElementById("status");
+  const open = all().filter(([r,m]) => status(r,m) === "open");
+  const champ = winnerOf(6,0);
+  if(champ !== null){
+    st.innerHTML = `<strong>${M[champ][2]} ${esc(M[champ][0])} is your 2026 champion.</strong>`;
+  } else if(open.length){
+    const mine = open.filter(([r,m]) => myPicks[key(r,m)] !== undefined).length;
+    const ml = minsLeft();
+    st.innerHTML = `<strong>${open.length} matchup${open.length === 1 ? " is" : "s are"} open</strong>` +
+      (live && canVote ? `<span class="sub">You've voted on ${mine} of ${open.length}.</span>` : "") +
+      `<span class="clock">Voting closes in ${Math.floor(ml/60)}h ${ml % 60}m</span>`;
+  } else {
+    const next = DAYS.find(d => d > t);
+    st.innerHTML = t < DAYS[0]
+      ? `<strong>Voting opens ${fmtDay(DAYS[0], true)}.</strong><span class="sub">New matchups open every weekday. Vote before midnight Pacific.</span>`
+      : next ? `<strong>No matchups open right now.</strong><span class="sub">The next ones open ${fmtDay(next, true)}.</span>`
+      : `<strong>Voting is over.</strong><span class="sub">The organizer is crowning the champion.</span>`;
+  }
+  const no = document.getElementById("notice");
+  if(!CONFIGURED) no.innerHTML = `<div class="notice">This site isn't connected to its database yet. Organizer: add your Supabase URL and key at the top of the script.</div>`;
+  else if(!live) no.innerHTML = "";
+  else if(!uid) no.innerHTML = `<div class="notice">Sign in to cast your votes. One ballot per person. <button class="btn" data-auth style="margin-left:8px">Sign in</button></div>`;
+  else no.innerHTML = "";
+}
+
+function renderTonight(){
+  const open = all().filter(([r,m]) => status(r,m) === "open");
+  let html = "";
+  const champ = winnerOf(6,0);
+  if(champ !== null) html += `<section class="group"><div class="empty" style="text-align:center;max-width:none"><div style="font-size:72px">${M[champ][2]}</div><h2 style="font-family:Nosifer,fantasy;color:var(--blood2);font-size:clamp(26px,5vw,48px);margin:10px 0">${esc(M[champ][0])}</h2><p>${M[champ][1]}, ${REGIONS[Math.floor(champ/16)]}, ${M[champ][3]} seed. Long may it haunt us.</p></div></section>`;
+  if(open.length){
+    const groups = {};
+    for(const [r,m] of open){ const l = label(r,m); (groups[l] = groups[l] || []).push([r,m]); }
+    for(const [l, list] of Object.entries(groups)){
+      const n = list.filter(([r,m]) => myPicks[key(r,m)] !== undefined).length;
+      const gi = REGIONS.indexOf(l);
+      html += `<section class="group"><div class="group-head" style="--cat:${gi < 0 ? "var(--violet)" : CAT_COLOR[gi]}"><h2>${gi < 0 ? "" : CAT_ICON[gi] + " "}${esc(l)}</h2>${live && canVote ? `<span>${n} of ${list.length} voted</span>` : ""}</div><div class="grid">${list.map(([r,m]) => matchHTML(r,m,"full")).join("")}</div></section>`;
+    }
+  } else if(champ === null){
+    const t = todayStr(), next = DAYS.find(d => d > t) || DAYS[0];
+    const idx = DAYS.indexOf(next);
+    const preview = all().filter(([r,m]) => sched(r,m)[0] === idx);
+    html += `<section class="group"><div class="empty"><h2>The crypt is quiet tonight.</h2><p>${t < DAYS[0] ? "Voting opens" : "The next matchups open"} ${fmtDay(next, true)} at midnight Pacific. Here's what's coming.</p></div></section>`;
+    if(preview.length) html += `<section class="group"><div class="grid">${preview.map(([r,m]) => matchHTML(r,m,"full")).join("")}</div></section>`;
+  }
+  const pending = all().filter(([r,m]) => status(r,m) === "closed");
+  if(pending.length) html += `<section class="group"><div class="group-head"><h2>Awaiting the verdict</h2><span>Voting closed</span></div><div class="grid">${pending.map(([r,m]) => matchHTML(r,m,"full")).join("")}</div></section>`;
+  const decided = all().filter(([r,m]) => status(r,m) === "decided");
+  if(decided.length){
+    const latestDay = Math.max(...decided.map(([r,m]) => sched(r,m)[1]));
+    const recent = decided.filter(([r,m]) => sched(r,m)[1] === latestDay);
+    html += `<section class="group"><div class="group-head"><h2>Latest results</h2><span>${fmtDay(DAYS[latestDay])}</span></div><div class="grid">${recent.map(([r,m]) => matchHTML(r,m,"full")).join("")}</div></section>`;
+  }
+  return html;
+}
+
+function renderBracket(){
+  let html = "";
+  for(let g = 0; g < 4; g++){
+    html += `<section class="group"><div class="group-head" style="--cat:${CAT_COLOR[g]}"><h2>${CAT_ICON[g]} ${REGIONS[g]}</h2></div><div class="bracket"><div class="bgrid">`;
+    for(let r = 1; r <= 4; r++){
+      const per = count(r)/4;
+      html += `<div class="bcol"><h3>${ROUNDS[r-1]}</h3>`;
+      for(let m = g*per; m < (g+1)*per; m++) html += matchHTML(r,m,"compact");
+      html += `</div>`;
+    }
+    html += `</div></div></section>`;
+  }
+  const c = winnerOf(6,0);
+  html += `<section class="group"><div class="group-head"><h2>Final 4 and Championship</h2></div><div class="bracket"><div class="bgrid final">
+    <div class="bcol"><h3>Final 4</h3>${matchHTML(5,0,"compact")}${matchHTML(5,1,"compact")}</div>
+    <div class="bcol"><h3>Championship</h3>${matchHTML(6,0,"compact")}</div>
+    <div class="bcol"><h3>Champion</h3><div class="match"><div class="row ${c !== null ? "won" : "tbd"}"><div class="pick">${c !== null
+      ? `<span class="seed">${M[c][3]}</span><span class="emo">${M[c][2]}</span><span class="name">${esc(M[c][0])}<small>${M[c][1]}</small></span><span></span>`
+      : `<span></span><span></span><span class="name">To be decided</span><span></span>`}</div></div></div></div>
+  </div></div></section>`;
+  return html;
+}
+
+function renderSchedule(){
+  const t = todayStr();
+  let html = `<section class="group"><div class="group-head"><h2>Voting schedule</h2><span>Weekdays, midnight to 11:59 PM Pacific</span></div><div class="sched">`;
+  DAYS.forEach((d,i) => {
+    const list = all().filter(([r,m]) => { const [s,e] = sched(r,m); return i >= s && i <= e; });
+    const rounds = [...new Set(list.map(([r]) => ROUNDS[r-1]))].join(", ");
+    const cls = d === t ? "today" : d < t ? "done" : "";
+    const chip = d === t ? "Today" : d < t ? "Done" : "Upcoming";
+    const items = list.map(([r,m]) => {
+      const a = entrant(r,m,0), b = entrant(r,m,1);
+      return `<li><span class="dot" style="--cat:${catColor(r,m)}" aria-hidden="true"></span>${a !== null && b !== null ? `${M[a][2]} ${esc(M[a][0])} vs. ${M[b][2]} ${esc(M[b][0])}` : `<span style="color:var(--muted)">${esc(label(r,m))} matchup, to be decided</span>`}</li>`;
+    }).join("");
+    html += `<div class="sday ${cls}"><div class="d">${fmtDay(d)}<small>${rounds}</small></div><ul>${items}</ul><span class="chip">${chip}</span></div>`;
+  });
+  return html + `</div></section>`;
+}
+
+function renderOrganizer(){
+  if(!isAdmin) return "";
+  if(!live) return `<div class="empty"><h2>Still connecting.</h2><p>The organizer tools need the bracket's live data, which hasn't loaded yet. Reload the page, and check that the Supabase settings at the top of the script are filled in.</p></div>`;
+  const needs = all().filter(([r,m]) => status(r,m) === "closed");
+  const open = all().filter(([r,m]) => status(r,m) === "open");
+  let html = `<section class="group"><div class="group-head"><h2>Needs a winner</h2><span>${needs.length}</span></div>` +
+    (needs.length ? `<div class="grid org">${needs.map(([r,m]) => matchHTML(r,m,"admin")).join("")}</div>` : `<p style="color:var(--muted)">No closed matchups are waiting on you.</p>`) + `</section>`;
+  const noQuip = all().filter(([r,m]) => status(r,m) === "decided" && !(state.quips && state.quips[key(r,m)]));
+  if(noQuip.length) html += `<section class="group"><div class="group-head"><h2>Needs a one-liner</h2><span>${noQuip.length}</span></div><div class="grid org">${noQuip.map(([r,m]) => matchHTML(r,m,"admin")).join("")}</div></section>`;
+  if(open.length) html += `<section class="group"><div class="group-head"><h2>Open now</h2><span>${open.length}</span></div><div class="grid org">${open.map(([r,m]) => matchHTML(r,m,"admin")).join("")}</div></section>`;
+  html += `<section class="group"><div class="group-head"><h2>Every matchup by day</h2></div>`;
+  DAYS.forEach((d,i) => {
+    const list = all().filter(([r,m]) => sched(r,m)[0] === i);
+    const done = list.filter(([r,m]) => status(r,m) === "decided").length;
+    html += `<details class="day"><summary>${fmtDay(d)}<span>${[...new Set(list.map(([r]) => ROUNDS[r-1]))].join(", ")}, ${done} of ${list.length} decided</span></summary><div class="grid org">${list.map(([r,m]) => matchHTML(r,m,"admin")).join("")}</div></details>`;
+  });
+  html += `</section><section class="danger-zone"><h2 style="margin:0 0 6px;font-size:18px">Reset the bracket</h2><p>Deletes every vote, winner, override, one-liner, and custom matchup text. Use this after testing, before voting opens.</p><button class="btn danger" id="reset">${armed === "reset" ? "Click again to delete everything" : "Reset everything"}</button></section>`;
+  return html;
+}
+
+function renderTabs(){
+  const tabs = [["tonight","Tonight's matchups"],["bracket","Full bracket"],["schedule","Schedule"]];
+  if(isAdmin) tabs.push(["organizer","Organizer"]);
+  if(!tabs.find(t => t[0] === view)) view = "tonight";
+  document.getElementById("tabs").innerHTML = tabs.map(([id,l]) => `<button data-tab="${id}" aria-selected="${view === id}">${l}</button>`).join("");
+}
+
+function render(){
+  const ds = document.activeElement && document.activeElement.dataset;
+  const focusedBlurb = ds && (ds.blurbfor || ds.quipfor);
+  if(focusedBlurb) return; // don't wipe an organizer mid-edit
+  renderWho(); renderStatus(); renderTabs();
+  const app = document.getElementById("app");
+  app.innerHTML = view === "tonight" ? renderTonight() : view === "bracket" ? renderBracket() : view === "schedule" ? renderSchedule() : renderOrganizer();
+  flashKey = null;
+}
+
+document.getElementById("tabs").addEventListener("click", e => {
+  const b = e.target.closest("[data-tab]"); if(!b) return;
+  view = b.dataset.tab; armed = null; render();
+});
+document.getElementById("app").addEventListener("click", e => {
+  const el = e.target.closest("button"); if(!el) return;
+  const d = el.dataset;
+  if(d.vote) return vote(d.vote, +d.s);
+  if(d.crown) return crown(d.crown, +d.idx);
+  if(d.ov !== undefined) return setOverride(d.ov, d.val);
+  if(d.undo) return undoWinner(d.undo);
+  if(d.saveblurb) return saveBlurb(d.saveblurb);
+  if(d.resetblurb) return saveBlurb(d.resetblurb, true);
+  if(d.savequip) return saveQuip(d.savequip);
+  if(d.clearquip) return saveQuip(d.clearquip, true);
+  if(el.id === "reset") return resetAll();
+});
+
+function vote(k,s){
+  const [r,m] = k.split("-").map(Number);
+  if(!uid){ openAuth(); return; }
+  if(status(r,m) !== "open" || myPicks[k] === s) return;
+  myPicks = {...myPicks, [k]: s};
+  flashKey = k;
+  render();
+  save();
+}
+async function save(){
+  dirty = true;
+  if(saving) return;
+  saving = true;
+  while(dirty){
+    dirty = false;
+    const { error } = await db.from("ballots").upsert({user_id: uid, picks: myPicks, updated_at: new Date().toISOString()});
+    if(error) toast("Your vote didn't save. Tap it again to retry.");
+  }
+  saving = false;
+  scheduleBallots();
+}
+
+function writeState(mutate, okMsg){
+  const next = JSON.parse(JSON.stringify(state));
+  mutate(next);
+  state = next; armed = null; render();
+  writeChain = writeChain.then(async () => {
+      const { error } = await db.from("bracket_state").upsert({id: 1, results: next.results, overrides: next.overrides, blurbs: next.blurbs, quips: next.quips || {}, updated_at: new Date().toISOString()});
+      if(error) throw error;
+      if(okMsg) toast(okMsg);
+    })
+    .catch(() => { toast("That change didn't save. Make sure your account is set up as an admin."); loadState(); });
+}
+function crown(k, idx){
+  writeState(s => { s.results[k] = idx; delete s.overrides[k]; }, `${M[idx][0]} advances.`);
+}
+function setOverride(k, val){
+  writeState(s => { if(val) s.overrides[k] = val; else delete s.overrides[k]; },
+    val === "open" ? "Voting is open for this matchup." : val === "closed" ? "Voting is closed for this matchup." : "This matchup is back on its normal schedule.");
+}
+function undoWinner(k){
+  if(armed !== "undo:" + k){ armed = "undo:" + k; render(); return; }
+  writeState(s => { delete s.results[k]; }, "Winner removed.");
+}
+function saveBlurb(k, reset){
+  const ta = document.querySelector(`textarea[data-blurbfor="${k}"]`);
+  const text = reset ? "" : (ta ? ta.value.trim() : "");
+  if(ta) ta.blur();
+  writeState(s => { if(text) s.blurbs[k] = text; else delete s.blurbs[k]; }, reset ? "Default text restored." : "Matchup text saved.");
+}
+function saveQuip(k, clear){
+  const ta = document.querySelector(`textarea[data-quipfor="${k}"]`);
+  const text = clear ? "" : (ta ? ta.value.trim() : "");
+  if(ta) ta.blur();
+  writeState(s => { s.quips = s.quips || {}; if(text) s.quips[k] = text; else delete s.quips[k]; }, clear ? "One-liner removed." : "One-liner saved.");
+}
+async function resetAll(){
+  if(armed !== "reset"){ armed = "reset"; render(); return; }
+  armed = null;
+  const a = await db.from("bracket_state").upsert({id: 1, results:{}, overrides:{}, blurbs:{}, quips:{}, updated_at: new Date().toISOString()});
+  const b = await db.from("ballots").delete().neq("user_id", "00000000-0000-0000-0000-000000000000");
+  if(a.error || b.error){ toast("The reset didn't finish. Make sure your account is set up as an admin."); }
+  else { myPicks = {}; toast("The bracket has been reset."); }
+  loadState(); loadBallots();
+}
+
+function applyBallots(rows){
+  lastRows = rows;
+  const t = {}; let v = 0, mineFound = false;
+  for(const row of rows){
+    const picks = row.picks || {};
+    let any = false;
+    for(const [k,s] of Object.entries(picks)){
+      if(s !== 0 && s !== 1) continue;
+      (t[k] = t[k] || [0,0])[s]++; any = true;
+    }
+    if(any) v++;
+    if(uid && row.user_id === uid){ mineFound = true; if(!saving && !dirty) myPicks = {...picks}; }
+  }
+  if(!mineFound && !saving && !dirty && !uid) myPicks = {};
+  tallies = t; voterCount = v;
+  render();
+}
+
+render();
+let lastDay = todayStr();
+setInterval(() => {
+  const d = todayStr();
+  if(d !== lastDay){ lastDay = d; render(); }
+  else if(view === "tonight" && !document.activeElement?.dataset?.blurbfor && !document.activeElement?.dataset?.quipfor) renderStatus();
+}, 60000);
+
+
+async function loadState(){
+  const { data, error } = await db.from("bracket_state").select("*").eq("id", 1).maybeSingle();
+  if(error) return;
+  const d = data || {};
+  state = {results: d.results || {}, overrides: d.overrides || {}, blurbs: d.blurbs || {}, quips: d.quips || {}};
+  render();
+}
+async function loadBallots(){
+  const { data, error } = await db.from("ballots").select("user_id,picks").limit(5000);
+  if(error) return;
+  applyBallots(data || []);
+}
+let ballotTimer = null;
+function scheduleBallots(){ clearTimeout(ballotTimer); ballotTimer = setTimeout(loadBallots, 400); }
+
+async function applySession(session){
+  const u = session && session.user ? session.user : null;
+  const changed = (u ? u.id : null) !== uid;
+  uid = u ? u.id : null;
+  const md = (u && u.user_metadata) || {};
+  myName = u ? (md.full_name || md.name || (u.email || "").split("@")[0]) : "";
+  canVote = !!uid;
+  isAdmin = false;
+  if(changed) myPicks = {};
+  if(uid){
+    const { data } = await db.from("admins").select("user_id").eq("user_id", uid).maybeSingle();
+    isAdmin = !!data;
+    closeAuth();
+  }
+  if(lastRows) applyBallots(lastRows); else render();
+}
+
+// ---------- sign-in panel ----------
+let authMode = "signin";
+function authMsg(t){ document.getElementById("auth-msg").textContent = t || ""; }
+function setAuthMode(mode){
+  authMode = mode;
+  const up = mode === "signup";
+  document.getElementById("auth-name-wrap").hidden = !up;
+  document.getElementById("auth-submit").textContent = up ? "Create account" : "Sign in";
+  document.getElementById("auth-pw").setAttribute("autocomplete", up ? "new-password" : "current-password");
+  document.querySelector("[data-authmode]").textContent = up ? "Already have an account? Sign in" : "New here? Create an account";
+  authMsg("");
+}
+function openAuth(){
+  if(!db){ toast("Voting isn't connected yet."); return; }
+  document.getElementById("auth").hidden = false;
+  setTimeout(() => document.getElementById("auth-email").focus(), 30);
+}
+function closeAuth(){ document.getElementById("auth").hidden = true; authMsg(""); }
+document.addEventListener("click", async e => {
+  const t = e.target.closest("[data-auth],[data-signout],[data-closeauth],[data-google],[data-authmode]");
+  if(!t) { if(e.target.id === "auth") closeAuth(); return; }
+  if(t.hasAttribute("data-auth")) return openAuth();
+  if(t.hasAttribute("data-closeauth")) return closeAuth();
+  if(t.hasAttribute("data-authmode")) return setAuthMode(authMode === "signin" ? "signup" : "signin");
+  if(t.hasAttribute("data-signout")){ await db.auth.signOut(); toast("Signed out."); return; }
+  if(t.hasAttribute("data-google")){
+    const { error } = await db.auth.signInWithOAuth({provider: "google", options: {redirectTo: location.origin + location.pathname}});
+    if(error) authMsg(error.message);
+  }
+});
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeAuth(); });
+document.getElementById("auth-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const email = document.getElementById("auth-email").value.trim();
+  const password = document.getElementById("auth-pw").value;
+  const btn = document.getElementById("auth-submit");
+  btn.disabled = true; authMsg("");
+  try {
+    if(authMode === "signup"){
+      const full_name = document.getElementById("auth-name").value.trim();
+      const { data, error } = await db.auth.signUp({email, password, options: {data: {full_name}, emailRedirectTo: location.origin + location.pathname}});
+      if(error) authMsg(error.message);
+      else if(!data.session) authMsg("Check your email to confirm your account, then come back and sign in.");
+    } else {
+      const { error } = await db.auth.signInWithPassword({email, password});
+      if(error) authMsg(error.message === "Invalid login credentials" ? "That email and password don't match. New here? Create an account below." : error.message);
+    }
+  } finally { btn.disabled = false; }
+});
+
+(async function init(){
+  if(!CONFIGURED){ render(); return; }
+  db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  live = true;
+  const { data: { session } } = await db.auth.getSession();
+  await applySession(session);
+  db.auth.onAuthStateChange((_event, sess) => {
+    if(((sess && sess.user && sess.user.id) || null) !== uid) setTimeout(() => applySession(sess), 0);
+  });
+  await Promise.all([loadState(), loadBallots()]);
+  db.channel("fright-club")
+    .on("postgres_changes", {event: "*", schema: "public", table: "ballots"}, scheduleBallots)
+    .on("postgres_changes", {event: "*", schema: "public", table: "bracket_state"}, () => loadState())
+    .subscribe();
+  setInterval(() => { loadState(); loadBallots(); }, 60000); // safety net if live updates drop
+})();
+</script>
+</body>
+</html>
