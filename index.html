@@ -217,23 +217,7 @@ details.day .grid{padding:0 14px 14px}
 </footer>
 </div>
 <div class="toast" id="toast" role="status"></div>
-<div class="auth" id="auth" hidden>
-  <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-title">
-    <button class="auth-x" data-closeauth aria-label="Close">×</button>
-    <h2 id="auth-title">Join Fright Club</h2>
-    <p class="auth-sub">Sign in to vote. One ballot per person.</p>
-    <button class="btn google" data-google>Continue with Google</button>
-    <div class="or"><span>or use email</span></div>
-    <form id="auth-form">
-      <label id="auth-name-wrap" hidden>Your name<input id="auth-name" autocomplete="name" placeholder="How you'll show up on the site"></label>
-      <label>Email<input id="auth-email" type="email" required autocomplete="email"></label>
-      <label>Password<input id="auth-pw" type="password" required minlength="6" autocomplete="current-password"></label>
-      <button class="btn" type="submit" id="auth-submit">Sign in</button>
-    </form>
-    <p class="auth-msg" id="auth-msg" role="status"></p>
-    <p class="auth-switch"><button class="linkbtn" type="button" data-authmode>New here? Create an account</button></p>
-  </div>
-</div>
+<div class="auth" id="auth" hidden></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
 <script>
@@ -723,7 +707,30 @@ async function applySession(session){
 
 // ---------- sign-in panel ----------
 let authMode = "signin";
-function authMsg(t){ document.getElementById("auth-msg").textContent = t || ""; }
+const AUTH_PANEL = `  <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <button class="auth-x" data-closeauth aria-label="Close">×</button>
+    <h2 id="auth-title">Join Fright Club</h2>
+    <p class="auth-sub">Sign in to vote. One ballot per person.</p>
+    <button class="btn google" data-google>Continue with Google</button>
+    <div class="or"><span>or use email</span></div>
+    <form id="auth-form">
+      <label id="auth-name-wrap" hidden>Your name<input id="auth-name" autocomplete="name" placeholder="How you'll show up on the site"></label>
+      <label>Email<input id="auth-email" type="email" required autocomplete="email"></label>
+      <label>Password<input id="auth-pw" type="password" required minlength="6" autocomplete="current-password"></label>
+      <button class="btn" type="submit" id="auth-submit">Sign in</button>
+    </form>
+    <p class="auth-msg" id="auth-msg" role="status"></p>
+    <p class="auth-switch"><button class="linkbtn" type="button" data-authmode>New here? Create an account</button></p>
+  </div>
+`;
+let authBuilt = false;
+function ensureAuth(){
+  if(authBuilt) return;
+  authBuilt = true;
+  document.getElementById("auth").innerHTML = AUTH_PANEL;
+  document.getElementById("auth-form").addEventListener("submit", submitAuth);
+}
+function authMsg(t){ const el = document.getElementById("auth-msg"); if(el) el.textContent = t || ""; }
 function setAuthMode(mode){
   authMode = mode;
   const up = mode === "signup";
@@ -735,6 +742,7 @@ function setAuthMode(mode){
 }
 function openAuth(){
   if(!db){ toast("Voting isn't connected yet."); return; }
+  ensureAuth();
   document.getElementById("auth").hidden = false;
   setTimeout(() => document.getElementById("auth-email").focus(), 30);
 }
@@ -752,7 +760,7 @@ document.addEventListener("click", async e => {
   }
 });
 document.addEventListener("keydown", e => { if(e.key === "Escape") closeAuth(); });
-document.getElementById("auth-form").addEventListener("submit", async e => {
+async function submitAuth(e){
   e.preventDefault();
   const email = document.getElementById("auth-email").value.trim();
   const password = document.getElementById("auth-pw").value;
@@ -769,7 +777,7 @@ document.getElementById("auth-form").addEventListener("submit", async e => {
       if(error) authMsg(error.message === "Invalid login credentials" ? "That email and password don't match. New here? Create an account below." : error.message);
     }
   } finally { btn.disabled = false; }
-});
+}
 
 (async function init(){
   if(!CONFIGURED){ render(); return; }
